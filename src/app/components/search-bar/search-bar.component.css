@@ -1,0 +1,13 @@
+input {
+    color: #ffffff;
+}
+
+.search-form {
+    min-width: 300px;
+    max-width: 350px;
+    width: 100%;
+}
+
+.search-bar > * {
+    width: 100%;
+}

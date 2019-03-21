@@ -1,0 +1,16 @@
+#wrapper {
+    display: flex;
+    position: absolute;
+    width: 100%;
+    /* This makes the wrapper the height of page - header */
+    height: calc(100% - 62px);
+    height: -o-calc(100% - 62px); /* opera */
+    height: -webkit-calc(100% - 62px); /* google, safari */
+    height: -moz-calc(100% - 62px); /* firefox */
+    /* justify-content: center; */
+    background: #303030;
+}
+
+.search-wrapper {
+    padding: 10px 10px 10px 25px;
+}

@@ -1,0 +1,12 @@
+h1 {
+    margin: 0px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: #5BC0EB;
+    padding: 10px;
+    border-bottom: 2px solid#FDE74C;
+    height: 40px;
+}
+
+.title-text {
+    margin-left: 10px;
+}
