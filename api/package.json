@@ -1,21 +1,38 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "server.js",
+  "engines": {
+    "node": ">=6"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "lint": "eslint .",
+    "start": "nodemon --exec babel-node .",
+    "posttest": "npm run lint"
+  },
   "dependencies": {
-    "body-parser": "^1.18.3",
-    "cors": "^2.8.5",
-    "express": "^4.16.4",
-    "mongoose": "^5.4.19"
+    "@babel/cli": "^7.0.0",
+    "compression": "^1.0.3",
+    "cors": "^2.5.2",
+    "helmet": "^3.10.0",
+    "loopback": "^3.22.0",
+    "loopback-boot": "^2.6.5",
+    "loopback-component-explorer": "^6.2.0",
+    "serve-favicon": "^2.0.1",
+    "strong-error-handler": "^3.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
-  }
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.0.0",
+    "eslint": "^3.17.1",
+    "eslint-config-loopback": "^8.0.0",
+    "nodemon": "^1.19.0"
+  },
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "license": "UNLICENSED",
+  "description": "api"
 }

@@ -1,0 +1,13 @@
+.tune_input {
+  margin-left: 50px;
+  width: 700px;
+  height: 500px;
+}
+
+.tune_info {
+  width: 100%;
+}
+
+#name {
+  width: 300px;
+}
