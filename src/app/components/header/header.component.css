@@ -10,3 +10,11 @@ h1 {
 .title-text {
     margin-left: 10px;
 }
+
+button {
+    margin-left: 30px;
+}
+
+a {
+    color: inherit;
+}

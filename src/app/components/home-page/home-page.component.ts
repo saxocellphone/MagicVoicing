@@ -13,10 +13,10 @@ export class HomePageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dataService.getTunes().subscribe(tunes => {
-      this.tune = tunes;
-      this.dataService.tuneData = tunes;
-    });
+    // this.dataService.getTunes().subscribe(tunes => {
+    //   this.tune = tunes;
+    //   this.dataService.tuneData = tunes;
+    // });
   }
 
 }

@@ -1,0 +1,10 @@
+{
+  "_id": "production",
+  "postgresql_uri": "postgres://<username>:<password>@localhost/<database name>",
+  "mongodb_uri": "mongodb://localhost:27017/test",
+  "jwt_secret": "MW3DLOPByudzKWQGIQEc",
+  "meta": {
+    "created": "2019-05-08T19:10:41.200Z",
+    "updated": "2019-05-08T19:10:41.200Z"
+  }
+}

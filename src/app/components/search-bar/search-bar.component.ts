@@ -25,9 +25,9 @@ export class SearchBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.dataService.getTunes().subscribe(tunes => {
-      this.allTunes = tunes;
-    });
+    // this.dataService.getTunes().subscribe(tunes => {
+    //   this.allTunes = tunes;
+    // });
 
     this.autoControl.valueChanges.subscribe(userInput => {
       this.autoCompleteExpenseList(userInput);

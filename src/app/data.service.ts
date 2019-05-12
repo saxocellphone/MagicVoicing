@@ -12,6 +12,7 @@ export class DataService {
   tuneUrl = 'assets/leadsheets/Alone.xml';
   constructor(private http: HttpClient) { }
   getTunes(): Observable<Tune[]> {
-    return this.http.get<Tune[]>(this.tuneUrl);
+    // return this.http.get<Tune[]>(this.tuneUrl);
+    return null;
   }
 }

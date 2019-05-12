@@ -17,13 +17,15 @@ import {
   MatSidenavModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NewTuneComponent } from './components/new-tune/new-tune.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     SearchBarComponent,
-    HomePageComponent
+    HomePageComponent,
+    NewTuneComponent
   ],
   imports: [
     BrowserModule,

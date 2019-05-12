@@ -1,0 +1,14 @@
+<p>
+  Enter the chords in text format for now:
+</p>
+<form class="tune_input" [formGroup]="info" (ngSubmit)="onSubmit()">
+    <mat-form-field class="tune_info" id="name">
+      <input matInput placeholder="Name:" name="name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field class="tune_info">
+      <textarea matInput placeholder="Enter chords here:" name="chords" formControlName="chords"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button type="submit">Submit</button>
+</form>
+
