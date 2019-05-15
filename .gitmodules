@@ -1,0 +1,6 @@
+[submodule "./musical_notation"]
+	path = ./musical_notation
+	url = https://github.com/saxocellphone/musical_notation
+[submodule "musical_notation"]
+	path = musical_notation
+	url = https://github.com/saxocellphone/musical_notation.git
