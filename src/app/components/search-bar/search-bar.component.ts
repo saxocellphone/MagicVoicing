@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { DataService } from '../../data.service';
-import { Tune } from '../../tune';
+import { Tune } from '../../models/tune';
 
 @Component({
   selector: 'app-search-bar',
@@ -25,9 +25,9 @@ export class SearchBarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.dataService.getTunes().subscribe(tunes => {
-    //   this.allTunes = tunes;
-    // });
+    this.dataService.getTunes().subscribe(tunes => {
+      this.allTunes = tunes;
+    });
 
     this.autoControl.valueChanges.subscribe(userInput => {
       this.autoCompleteExpenseList(userInput);
@@ -35,7 +35,7 @@ export class SearchBarComponent implements OnInit {
   }
 
   private autoCompleteExpenseList(input) {
-    let categoryList = this.filterCategoryList(input)
+    let categoryList = this.filterCategoryList(input);
     this.autoCompleteList = categoryList;
   }
 
@@ -79,5 +79,9 @@ export class SearchBarComponent implements OnInit {
   focusOnPlaceInput() {
     this.autocompleteInput.nativeElement.focus();
     this.autocompleteInput.nativeElement.value = '';
+  }
+
+  loadTune(tune: string) {
+
   }
 }

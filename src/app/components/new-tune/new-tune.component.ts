@@ -22,8 +22,11 @@ export class NewTuneComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.info.value);
-    
+    // const values = this.info.value;
+    // this.dataService.addTune(values.name, values.chords)
+    //   .subscribe(tune =>  {
+    //       console.log('Added');
+    //   });
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../data.service';
-import { Tune } from '../../tune';
+import { Tune } from '../../models/tune';
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',

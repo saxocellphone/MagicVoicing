@@ -1,0 +1,20 @@
+.music_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    width: 800px;
+}
+
+.measures {
+    display: flex;
+    flex: 1 0 21%;
+    /* justify-content: space-; */
+    background: #424375;
+    border-radius: 0px;
+}
+
+.measures > .chord {
+    flex-grow: 1;
+}
+

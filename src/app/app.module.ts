@@ -14,10 +14,12 @@ import {
   MatAutocompleteModule, MatChipsModule,
   MatFormFieldModule, MatButtonModule, MatCheckboxModule,
   MatCardModule, MatMenuModule, MatToolbarModule,
-  MatSidenavModule
+  MatSidenavModule,
+  MatListModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewTuneComponent } from './components/new-tune/new-tune.component';
+import { SheetModeComponent } from './components/sheet-mode/sheet-mode.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { NewTuneComponent } from './components/new-tune/new-tune.component';
     HeaderComponent,
     SearchBarComponent,
     HomePageComponent,
-    NewTuneComponent
+    NewTuneComponent,
+    SheetModeComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +47,8 @@ import { NewTuneComponent } from './components/new-tune/new-tune.component';
     MatCardModule,
     MatMenuModule,
     MatToolbarModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

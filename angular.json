@@ -59,7 +59,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "MagicVoicing:build"
+            "browserTarget": "MagicVoicing:build",
+            "proxyConfig": "proxy.js"
           },
           "configurations": {
             "production": {

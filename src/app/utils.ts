@@ -2,11 +2,10 @@ import { Chord } from './models/chord';
 import * as _ from 'lodash';
 
 export enum CHORD_TYPES {
-    MAJOR = 'M',
-    MINOR = 'm',
-    DIMINISHED = 'd',
-    DOMINANT = 'D',
-    AUGMENTED = 'a'
+    MAJOR = 'maj',
+    MINOR = 'min',
+    DIMINISHED = 'dim',
+    DOMINANT = 'dom7'
 }
 
 export default class MusicUtils {
