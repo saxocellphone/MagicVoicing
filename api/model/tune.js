@@ -1,16 +1,21 @@
-'use strict';
+import mongoose from 'mongoose';
+import { Chord } from 'octavian';
 
-class Tune{
-    
-    constructor(name){
-        this.name = name;
-    }
+const Schema = mongoose.Schema;
 
-    getName(){
-    
-    }
-}
+let TuneSchema = new Schema({
+    name: String,
+    composer: String,
+    style: String,
+    key: String,
+    bpm: Number,
+    measures: [[String]],
+    timeSignature: String,
+    raw: String
+});
 
-export default {
+let Tune = mongoose.model('Tune', TuneSchema);
+
+export {
     Tune
 };
