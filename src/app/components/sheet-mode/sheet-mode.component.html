@@ -2,9 +2,10 @@
   <h2>"{{ tune.name }}" by {{ tune.composer }}</h2>
   <span>{{ tune.style }}</span>
   <div class="music_container">
-    <mat-card *ngFor="let measure of tune.measures" class="measures"> 
-        <a class="chord" id="chord_1">{{ measure[0] }}</a>
-        <a class="chord" id="chord_2">{{ measure[1] }}</a>
+      <mat-card *ngFor="let measure of tune.measures" class="measures"  (mouseenter) = "mouseEnter(measure[0] + ' ' + measure[1])" (mouseleave)="mouseLeave('div A')">
+          <a class="chord" id="chord_1">{{ measure[0] }}</a>
+          <a class="chord" id="chord_2">{{ measure[1] }}</a>
+  
     </mat-card>
   </div>
 </div>
