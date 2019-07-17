@@ -1,9 +1,22 @@
-#wrapper {
+#cardContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: flex-start;
+}
+
+#cardsToolbar {
+    padding-bottom: -10px;
+    margin-left: 50px;
+}
+
+#cardsToolbar > * {
+    margin-right: 30px;
+}
+
+.wrapper {
     width: 100%;
+    overflow-x: hidden;
 }
 
 .tune {

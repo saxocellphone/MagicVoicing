@@ -30,7 +30,6 @@ export class SheetModeComponent implements OnInit {
     this.service.getTune(this.name).subscribe(t => {
       this.tune = t;
       this.measures = this.tune.measures.length;
-      console.log(this.measures);
     });
   }
 

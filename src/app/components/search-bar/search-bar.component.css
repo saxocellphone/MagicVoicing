@@ -5,9 +5,8 @@ input {
 .search-form {
     min-width: 300px;
     max-width: 350px;
-    width: 100%;
 }
 
-.search-bar > * {
+/* .search-bar > * {
     width: 100%;
-}
+}  */

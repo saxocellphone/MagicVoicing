@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../data.service';
-import { Tune } from '../../models/tune';
+import { Router, RouterOutlet } from '@angular/router';
+import { slideInLeft } from '../../animations';
+
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  animations: [slideInLeft]
 })
 export class HomePageComponent implements OnInit {
-  tune: Tune[];
   constructor(
-    private dataService: DataService
+    private router: Router
   ) { }
 
   ngOnInit() {
-    // this.dataService.getTunes().subscribe(tunes => {
-    //   this.tune = tunes;
-    //   this.dataService.tuneData = tunes;
-    // });
+    this.router.navigate(['cards']);
   }
 
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+  }
 }

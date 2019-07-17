@@ -3,9 +3,10 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
+import mongoose, { Model, models } from 'mongoose';
 import _ from 'lodash';
 import octivian from 'octavian';
+import axios from 'axios';
 import ireader from 'ireal-reader';
 import fs from 'fs';
 
@@ -39,25 +40,32 @@ app.post('/addTune', (req, res) => {
     chords: chords
   }
   let tune = new Tune(tuneSchema);
-  console.log(tune);
   tune.save().then(tune => {
     return res.status(200).json({'tune': 'tune added!'});
   }).catch(err => {
     return res.status(400).send('Database access error: ' + err);
   });
-});
+}); 
 
-app.get('/getAllTunes', (req, res) => {
-  Tune.find({style: 'Latin'}, (err, tunes) => {
+app.get('/getTunes/:style?/:composer?/:perPage?/:lastResult?', (req, res) => {
+  const style = req.query.style;
+  const composer = req.query.composer;
+  const perPage = parseInt(req.query.perPage) || 30;
+  const lastResult = req.query.lastResult || '#';
+  Tune.find({name: {$gt: lastResult}}).limit(perPage).exec((err, tunes) => {
     return res.send(_.map(tunes, tune => {
-      return tune.name;
+      return {
+        name: tune.name,
+        composer: tune.composer,
+        youtubeId: tune.youtubeId,
+        youtubeThumbnailURL: tune.youtubeThumbnailURL
+      };
     }));
   });
 });
 
 app.get('/getTune/:name', (req, res) => {
   const name = req.params.name;
-  console.log(name);
   Tune.findOne({name: name}, (err, tune) => {
     if(!tune){
       return res.status(404).send('No tune found :(');
@@ -66,40 +74,44 @@ app.get('/getTune/:name', (req, res) => {
   });
 });
 
-// fs.readFile('./songs', (err ,data) => {
-//   if(err) throw err;
-//   const tmp = ireader(data);
-//   fs.writeFile('ireal', JSON.stringify(tmp.songs));
-//   // console.log(tmp);
+
+const apikey = 'AIzaSyCjIeU80Kva2dzUCIczl-3pzJSrli73TFc';
+let dets = [];
+Tune.find({youtubeId: {$exists: false}}, (err, tunes) => {
+  tunes.forEach(tune => {
+    dets.push(tune.name);
+  });
+});
+
+let tmp = [];
+// Tune.find({}, (err, res) => {
+//   res.forEach(t => {
+//     tmp.push(t.youtubeId);
+//     console.log(tmp.)
+//   });
 // });
 
-// fs.readFile('ireal.json', (err, data) => {
-//   try {
-//     const json = JSON.parse(data);
-//     _.forEach(json, (tune, i) => {
-//       const tuneSchema = {
-//         name: tune.title,
-//         composer: tune.composer,
-//         measures: tune.music.measures,
-//         key: tune.key,
-//         style: tune.style,
-//         bpm: tune.bpm,
-//         timeSignature: tune.music.timeSignature,
-//         raw: tune.music.raw
-//       }
-//       let newTune = new Tune(tuneSchema);
-//       newTune.save().then(msg => {
-//         console.log(`added ${i}th tune: ${tune.title}`);
-//       }).catch(e => {
-//         console.error(e);
-//       });
-//     });
+console.log(tmp.length);
 
-//     // console.log(json[0]);
-//   } catch(e) {
-//     console.error(e);
-//   }
-// });
+let i = 0;
+// setInterval(() => {
+//   update(i);
+//   i++;
+// }, 1000);
+
+function update() {
+  axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&key=${apikey}&q=${dets[i]}-jazz`).then(response => {
+    const sets = {
+      youtubeThumbnailURL: response.data.items[0].snippet.thumbnails.high.url,
+      youtubeId: response.data.items[0].id.videoId
+    };
+    Tune.updateOne({name: dets[i]}, {$set: sets}, (err ,num) => {
+      console.log(`updated ${dets[i]}`);
+    });
+  }).catch(err => {
+    console.log('ERROR' + err);
+  });
+}
 
 app.listen(process.env.PORT, () => {
     console.log(`Magic Voicing listening on port ${process.env.PORT}!`);

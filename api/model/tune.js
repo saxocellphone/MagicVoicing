@@ -11,7 +11,9 @@ let TuneSchema = new Schema({
     bpm: Number,
     measures: [[String]],
     timeSignature: String,
-    raw: String
+    raw: String,
+    youtubeId: String,
+    youtubeThumbnailURL: String
 });
 
 let Tune = mongoose.model('Tune', TuneSchema);

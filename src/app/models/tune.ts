@@ -10,3 +10,9 @@ export interface Tune {
     timeSignature: string;
     raw: string;
 }
+
+export interface TuneQuery {
+    name?: string;
+    composer?: string;
+    style?: string;
+};

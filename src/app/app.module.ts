@@ -20,7 +20,8 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NewTuneComponent } from './components/new-tune/new-tune.component';
 import { SheetModeComponent } from './components/sheet-mode/sheet-mode.component';
-
+import { CardsComponent } from './components/cards/cards.component';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +29,11 @@ import { SheetModeComponent } from './components/sheet-mode/sheet-mode.component
     SearchBarComponent,
     HomePageComponent,
     NewTuneComponent,
-    SheetModeComponent
+    SheetModeComponent,
+    CardsComponent
   ],
   imports: [
+    InfiniteScrollModule,
     BrowserModule,
     AppRoutingModule,
     MatIconModule,

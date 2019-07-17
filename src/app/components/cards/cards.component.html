@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <div class="wrapper" id="cardsToolbar">
+    <mat-form-field>
+      <input matInput [formControl]="autocontrol" placeholder="Enter the name here">
+    </mat-form-field>
+    <mat-menu #appMenu="matMenu">
+      <button mat-menu-item>Settings</button>
+      <button mat-menu-item>Help</button>
+    </mat-menu>
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" class="sort">
+      <mat-icon>sort</mat-icon>
+    </button>
+  </div>
+  <!-- [@listStagger]="tunes.length" -->
+  <!-- <ng-container *ngIf="tunes$ | async as tunes"> -->
+    <div class="wrapper" id="cardContainer" 
+      infinite-scroll
+      [infiniteScrollDistance]="scrollDistance"
+      [infiniteScrollUpDistance]="scrollUpDistance"
+      [infiniteScrollThrottle]="throttle"
+      [scrollWindow]="true"
+      (scrolled)="onScrollDown()" 
+      [@listStagger]="tunes.length">
+      <mat-card class="tune" *ngFor="let tune of tunes" [routerLink] = "['/sheetMode', tune.name]">
+        <mat-card-header>
+          <mat-card-title>{{ tune.name }}</mat-card-title>
+          <mat-card-subtitle>{{ tune.composer }} </mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="{{ tune.youtubeThumbnailURL || nullPic }}">
+      </mat-card>
+    </div>
+  <!-- </ng-container> -->
+</div>

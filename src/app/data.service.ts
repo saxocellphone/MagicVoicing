@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Tune } from './models/tune';
+import { Tune, TuneQuery } from './models/tune';
 import {Observable} from 'rxjs';
-import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import MusicUtils from './utils';
 
@@ -12,21 +12,28 @@ export class DataService {
   searchOption = [];
   public tuneData: Tune[];
   tuneUrl = 'assets/leadsheets/Alone.xml';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
-    })
-  };
+  headers = new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept'
+  });
 
   constructor(private http: HttpClient) { }
-  getTunes(): Observable<Tune[]> {
-    return this.http.get<Tune[]>('/api/getAllTunes', this.httpOptions);
+
+  getTunes(queries?: TuneQuery, perPage?: number, lastResult?: string): Observable<Tune[]> {
+    let params = new HttpParams();
+    Object.keys(queries).forEach(q => {
+      params = params.set(q, queries[q]);
+    });
+    console.log(lastResult);
+    if (lastResult) {
+      params = params.set('lastResult', lastResult);
+    }
+    return this.http.get<Tune[]>('/api/getTunes', {headers: this.headers, params});
   }
 
   getTune(name: string): Observable<Tune> {
-    return this.http.get<Tune>(`/api/getTune/${name}`, this.httpOptions);
+    return this.http.get<Tune>(`/api/getTune/${name}`, {headers: this.headers});
   }
 
   addTune(name: string, chords: string) {
