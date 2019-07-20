@@ -37,12 +37,21 @@ export class SheetModeComponent implements OnInit {
   }
 
   mouseEnter(div: string) {
+    //display chord
     var chords = div.split(" ");
     for(var i = 0; i < chords.length; i++) {
       if(chords[i] != "undefined") {
         console.log('measure[' + i +']: ' + chords[i]);
       }
     }
+    var img = document.createElement("img");
+    img.src = 'https://www.basicmusictheory.com/img/b-flat-dominant-7th-chord-on-bass-clef.png';
+    img.width = 200;
+    img.height = 200;
+    img.alt = 'hi';
+    img.id = 'cat';
+
+    document.body.appendChild(img);
   }
 
   mouseLeave(div : string) {
@@ -52,6 +61,8 @@ export class SheetModeComponent implements OnInit {
     // console.log('leave measures: '  + this.measures);
     this.count++;
     console.log('leave: '+this.count);
+    var image_x = document.getElementById('cat');
+    image_x.parentNode.removeChild(image_x);
 
   }
 
