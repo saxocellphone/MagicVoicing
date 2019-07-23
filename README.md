@@ -9,6 +9,11 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Run api
 Navigate to /api and run `npm start` to start the backend.
 
+## Debug Mode (VS Code)
+In VS Code > Preferences > Settings, search for node debug, and turn on auto-attatch
+Navigate to /api and run `npm run debug`.
+Enjoy debugging
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
