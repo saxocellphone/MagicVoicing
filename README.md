@@ -36,6 +36,17 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Docker (In development)
 
+#### Mac OS and Linux
+
+Run an instance of MongoDB with `docker run --name db mongo:3.2`
+
 Build with `docker build . -t magicvoicing`
 
-Run with `docker run -p 4000:4000 -p 4200:4200 --link db:db magicvoicing`
+Run with `docker run --name mv -p 4000:4000 -p 4200:4200 --link db:db magicvoicing`
+where `db` is the name of an instance of the running mongoDB Docker container.
+
+[//]: # (--link is deprecated, consider using an alternative.)
+
+#### Windows
+
+This method is currently having issues with port forwarding on Windows 10, but it will build into a container with the steps above.
