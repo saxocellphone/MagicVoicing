@@ -2,21 +2,32 @@ FROM node:12
 
 MAINTAINER Nick Chan <chann3@rpi.edu>
 
-WORKDIR /app
+RUN pwd
 
-COPY . /app
+WORKDIR /app
+RUN pwd
+
+COPY . .
 COPY package*.json ./
 
-# Removed the @angular\cli since Docker would exit, saying the character was unsupported 
-RUN npm install -g angular\cli
-RUN npm install --save glob
+RUN pwd
+RUN ls
+
+RUN npm install -g @angular/cli
+RUN npm install
 RUN npm audit fix
 
-WORKDIR /app/api
-RUN npm install --save glob
+WORKDIR ./api
+RUN pwd
+RUN ls
+
+RUN npm install
 RUN npm audit fix
+
+RUN pwd
+RUN ls
 
 EXPOSE 4000
 EXPOSE 4200
 
-CMD ng serve && cd /api && npm start
+CMD ng serve && cd ./api && npm start
