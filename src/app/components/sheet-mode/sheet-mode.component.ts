@@ -32,9 +32,45 @@ export class SheetModeComponent implements OnInit {
     this.service.getTune(this.name).subscribe(t => {
       this.tune = t;
       this.measures = this.tune.measures.length;
+      //normalize all chords
+      var temp = "";
+      for(var i = 0; i < this.measures; i++) {
+       for(var j = 0; j < this.tune.measures[i].length; j++) {
+         if(this.tune.measures[i][j].includes("^")) {
+           var str_a = this.tune.measures[i][j].split("^");
+           for(var k = 0; k < str_a.length; k++) {
+             temp += str_a[k];
+             console.log(temp);
+           }
+          //  this.tune.measures[i][j].replace(this.tune.measures[i][j], temp);
+          this.tune.measures[i][j] = temp;
+          console.log(this.tune.measures[i][j]);
+         }
+         temp = "";
+
+       } 
+      }
     });
     
   }
+
+  //doesn't actually change the measures of the tune yet
+  normalizeMeasures(measures) {
+    var temp = "";
+    measures.forEach(function(element){
+      for(var i = 0; i < element.length; i++) {
+        if(element[i].includes("^")) {
+          var str_a = element[i].split("^");
+          for(var j = 0; j < str_a.length; j++) {
+            temp+= str_a[j];
+            console.log(temp);
+          }
+        }
+        temp = "";
+      }
+    });
+  }
+
 
   mouseEnter(div: string) {
     //display chord
@@ -44,14 +80,15 @@ export class SheetModeComponent implements OnInit {
         console.log('measure[' + i +']: ' + chords[i]);
       }
     }
-    var img = document.createElement("img");
-    img.src = 'https://www.basicmusictheory.com/img/b-flat-dominant-7th-chord-on-bass-clef.png';
-    img.width = 200;
-    img.height = 200;
-    img.alt = 'hi';
-    img.id = 'cat';
+    //no need to display image right now
+    // var img = document.createElement("img");
+    // img.src = 'https://www.basicmusictheory.com/img/b-flat-dominant-7th-chord-on-bass-clef.png';
+    // img.width = 200;
+    // img.height = 200;
+    // img.alt = 'hi';
+    // img.id = 'cat';
 
-    document.body.appendChild(img);
+    // document.body.appendChild(img);
   }
 
   mouseLeave(div : string) {
@@ -61,8 +98,8 @@ export class SheetModeComponent implements OnInit {
     // console.log('leave measures: '  + this.measures);
     this.count++;
     console.log('leave: '+this.count);
-    var image_x = document.getElementById('cat');
-    image_x.parentNode.removeChild(image_x);
+    // var image_x = document.getElementById('cat');
+    // image_x.parentNode.removeChild(image_x);
 
   }
 
