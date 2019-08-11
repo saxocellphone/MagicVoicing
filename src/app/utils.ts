@@ -1,5 +1,6 @@
 import { Chord } from './models/chord';
 import * as _ from 'lodash';
+import * as octavian from 'octavian';
 
 export enum CHORD_TYPES {
     MAJOR = 'maj',
@@ -39,14 +40,12 @@ export default class MusicUtils {
             throw new Error(`The chord type in ${chord} is not recognized.`);
         }
 
-        const root = rootMatch[0];
+        var root = rootMatch[0] + "3";
         const type = typeMatch[0];
         const modifiers = modifiersMatch;
-        const newChord: Chord = {
-            root,
-            type,
-            modifiers
-        };
+
+        const newChord = new octavian.Chord(root, type);
+
         return newChord;
     }
 }
