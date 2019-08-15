@@ -34,19 +34,61 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## Docker (In development)
+## Installing the Environment and Running the Project
 
-#### Mac OS and Linux
+#### Windows 10
 
-Run an instance of MongoDB with `docker run --name db mongo:3.2`
+0) Clone MagicVoicing with `git clone git@github.com:saxocellphone/MagicVoicing.git`
 
-Build with `docker build . -t magicvoicing`
+1) Ensure that Node.js is installed. 
 
-Run with `docker run --name mv -p 4000:4000 -p 4200:4200 --link db:db magicvoicing`
-where `db` is the name of an instance of the running mongoDB Docker container.
+2) Install Angular CLI globally with `npm install -g @angular\cli`.
 
-[//]: # (--link is deprecated, consider using an alternative.)
+3) Navigate to `\MagicVoicing\` and run `npm install`.
 
-#### Windows
+4) Navigate to `\MagicVoicing\api` and run `npm install`. If prompted, run `npm audit fix`.
 
-This method is currently having issues with port forwarding on Windows 10, but it will build into a container with the steps above.
+5) To launch the app, navigate to `\MagicVoicing\` and run `ng serve` and in the `\api` folder, run `npm start`.
+
+##### Issues
+
+You may encounter an error that claims that nodemon file watcher limit has been reached. We worked around this by running `run echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
+
+#### MacOS
+
+We use Docker to run the project on MacOS. If you wish to build the development environment without it, feel free to contribute to the
+
+#### Linux (Ubuntu 18.04.2)
+
+0) Clone MagicVoicing with `git clone git@github.com:saxocellphone/MagicVoicing.git`
+
+1) Run `sudo apt-get install curl software-properties-common`
+
+2) Run `curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -` and `echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list` to add the yarn repository
+
+3) Run `sudo apt-get update && sudo apt-get install yarn`
+
+4) Run `alias ng="/usr/local/lib/node_modules/@angular/cli/bin/ng` to define the ng command.
+
+5) Run `npm install -g @angular\cli` to install angular CLI globally. 
+
+6) Navigate to `\MagicVoicing\` and run `npm install`.
+
+7) Navigate to `\MagicVoicing\api` and run `npm install`. If prompted, run `npm audit fix`.
+
+8) To launch the app, navigate to `\MagicVoicing\` and run `ng serve` and in the `\api` folder, run `npm start`.
+
+#### Docker
+
+Currently, the Docker instance of MagicVoicing works on MacOS and Linux. To build the project using Docker:
+
+0) Clone MagicVoicing with `git clone git@github.com:saxocellphone/MagicVoicing.git`
+
+1) Navigate to the installation folder and build the Docker container with `docker build . -t magicvoicing`. This names the Docker image "magicvoicing". 
+
+2) Setup a MongoDB container with `docker run --name db mongo:3.2`. This creates the container if it didn't exist already, and names it "db". You can stop the container with `docker stop db`. Once the name of the container is set, you can re-start it with `docker run db`. 
+
+3) Once the Mongo container is running and the MagicVoicing container is built successfully, the project can be ran with `docker run --name mv -p 4000:4000 -p 4200:4200 --link db:db magicvoicing` where `db` is the name of an instance of the running mongoDB Docker container.
+When restarting the container, use `docker run mv -p 4000:4000 -p 4200:4200 --link db:db`.
+
+4) Once the container outputs "Compiled Successfully", the app can be viewed by entering `localhost:4200` in a web browser.
