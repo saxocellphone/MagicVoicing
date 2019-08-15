@@ -64,11 +64,15 @@ export default class MusicUtils {
      * @returns a Chord type
      */
     static parseChord(chord: string): octavian.Chord {
+        if (chord.indexOf('/') !== -1) {
+            // Currently doesn't support C/E , etc.
+            chord = chord.split('/')[0];
+        }
         const rootMatch = chord.match(/[A-G][#b]?/g);  // includes sharp/flat
         // M is major, m is minor, a is augmented, d is diminished,
         // h is half-deminished, default is major
-        const typeMatch = chord.match(/[Mmadh]/g) || [CHORD_TYPES.MAJOR];
-        const modifiersMatch = chord.match(/(?<=\()[#b]?\d+(?=\))/g); // All the numbers after the chord
+        const typeMatch = chord.match(/[M\-adh]/g) || [''];
+        const modifiersMatch = chord.match(/[#b]?\d/g); // All the numbers after the chord
 
         if (!rootMatch || rootMatch.length !== 1) {
             throw new Error(`The root note in ${chord} is not recognized.`);
