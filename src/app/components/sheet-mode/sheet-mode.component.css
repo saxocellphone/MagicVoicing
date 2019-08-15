@@ -19,3 +19,7 @@
     flex-grow: 1;
 }
 
+#notation {
+    background:wheat;
+    width: 800px;
+}
