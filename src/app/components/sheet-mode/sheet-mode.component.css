@@ -1,3 +1,18 @@
+button {
+  
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+
+    height: 50px;
+    width: 200px;
+    border: none;
+}
+
+button span {
+    display: none;
+}
+
+
 .music_container {
     display: flex;
     flex-direction: row;
@@ -23,3 +38,4 @@
     background:wheat;
     width: 800px;
 }
+

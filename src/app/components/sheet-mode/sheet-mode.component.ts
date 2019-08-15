@@ -7,6 +7,9 @@ import { Tune } from 'src/app/models/tune';
 import * as ABCJS from 'abcjs';
 import * as octavian from 'octavian';
 import MusicUtils from 'src/app/utils';
+import { AudioContext} from 'audio-context';
+
+declare var AudioContext, webkitAudioContext: any;
 
 @Component({
   selector: 'app-sheet-mode',
@@ -44,6 +47,41 @@ export class SheetModeComponent implements OnInit {
                   `K:C\n` +
                   `${MusicUtils.generateABCString(t.measures)}`;
       const tuneObjectArray = ABCJS.renderAbc('notation', abc);
+      // ABCJS.renderMidi("midi", abc);
+      // ABCJS.renderMidi("midi-download", abc, {generateDownload: true, generateInline: false});
+      var visualObj = ABCJS.renderAbc("notation", abc)[0];
+      var midiBuffer;
+      var startAudioButton = document.querySelector(".activate-audio");
+      var stopAudioButton = document.querySelector(".stop-audio");
+
+      startAudioButton.addEventListener("click", function () {
+        startAudioButton.setAttribute("style", "display:none;");
+        stopAudioButton.setAttribute("style", "");        
+       
+        var audioContext = new AudioContext();
+        midiBuffer = new ABCJS.synth.CreateSynth();
+
+        return midiBuffer.init({
+          visualObj: visualObj,
+          audioContext: audioContext,
+          millisecondsPerMeasure: visualObj.millisecondsPerMeasure()
+  
+        }).then(function() {
+          return midiBuffer.prime();
+        }).then(function() {
+          midiBuffer.start();
+          return Promise.resolve();
+        }).catch(function(error) {
+          console.warn("synth error", error);
+        })
+      });
+
+      stopAudioButton.addEventListener("click", function() {
+        startAudioButton.setAttribute("style", "");
+				stopAudioButton.setAttribute("style", "display:none;");
+				midiBuffer.stop();
+      });
+     
 
       this.measures = this.tune.measures.length;
     });
