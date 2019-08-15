@@ -47,13 +47,10 @@ export class SheetModeComponent implements OnInit {
                   `K:C\n` +
                   `${MusicUtils.generateABCString(t.measures)}`;
       const tuneObjectArray = ABCJS.renderAbc('notation', abc);
-      // ABCJS.renderMidi("midi", abc);
-      // ABCJS.renderMidi("midi-download", abc, {generateDownload: true, generateInline: false});
       var visualObj = ABCJS.renderAbc("notation", abc)[0];
       var midiBuffer;
       var startAudioButton = document.querySelector(".activate-audio");
       var stopAudioButton = document.querySelector(".stop-audio");
-
       startAudioButton.addEventListener("click", function () {
         startAudioButton.setAttribute("style", "display:none;");
         stopAudioButton.setAttribute("style", "");        
