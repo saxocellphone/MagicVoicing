@@ -72,7 +72,7 @@ export default class MusicUtils {
         const rootMatch = chord.match(/[A-G][#b]?/g);  // includes sharp/flat
         // M is major, m is minor, a is augmented, d is diminished,
         // h is half-deminished, default is major
-        const typeMatch = chord.match(/[M\-adh]/g) || [''];
+        const typeMatch = chord.match(/[\^\-adh]/g) || [''];
         const modifiersMatch = chord.match(/[#b]?\d/g); // All the numbers after the chord
 
         if (!rootMatch || rootMatch.length !== 1) {
@@ -101,7 +101,7 @@ export default class MusicUtils {
                 }
                 break;
             default:
-                if (modifiersMatch){
+                if (modifiersMatch[0] === '6'){
                     type = CHORD_TYPES.MAJOR6;
                 } else {
                     type = CHORD_TYPES.DOMINANT7;
@@ -110,8 +110,6 @@ export default class MusicUtils {
         }
 
         const root = rootMatch[0] + '3';
-        // const type = typeMatch[0];
-        const modifiers = modifiersMatch;
         const newChord = new octavian.Chord(root, type);
         return newChord;
     }
