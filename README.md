@@ -54,6 +54,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 You may encounter an error that claims that nodemon file watcher limit has been reached. We worked around this by running `run echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p`
 
+If the app does not appear in the browser, and you are running Docker through VirtualBox, launch Virtaubox, select the VM, and navigate to -> settings -> networking -> advanced -> port forwarding, and set rules to forward 4000 and 4200.
+
 #### MacOS
 
 We use Docker to run the project on MacOS. If you wish to build the development environment without it, feel free to contribute to the
