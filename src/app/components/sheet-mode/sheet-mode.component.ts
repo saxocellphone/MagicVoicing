@@ -39,8 +39,8 @@ export class SheetModeComponent implements OnInit {
       const abc = 'X: 1\n' +
                   `T: ${t.name}\n` +
                   `M: 4/4\n` +
-                  `L: 1/2\n` +
-                  `Q: 1/4=${t.bpm}\n` +
+                  `L: 1/4\n` +
+                  `Q: 1/4=120\n` +
                   `C: ${t.composer}\n` +
                   `S: \n` +
                   `R: ${t.style}\n` +
@@ -54,7 +54,6 @@ export class SheetModeComponent implements OnInit {
       startAudioButton.addEventListener("click", function () {
         startAudioButton.setAttribute("style", "display:none;");
         stopAudioButton.setAttribute("style", "");        
-       
         var audioContext = new AudioContext();
         midiBuffer = new ABCJS.synth.CreateSynth();
 
@@ -62,7 +61,6 @@ export class SheetModeComponent implements OnInit {
           visualObj: visualObj,
           audioContext: audioContext,
           millisecondsPerMeasure: visualObj.millisecondsPerMeasure()
-  
         }).then(function() {
           return midiBuffer.prime();
         }).then(function() {
@@ -82,7 +80,6 @@ export class SheetModeComponent implements OnInit {
 
       this.measures = this.tune.measures.length;
     });
-    console.log(MusicUtils.parseChords('C7'));
   }
 
 }

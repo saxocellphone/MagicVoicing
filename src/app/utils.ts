@@ -47,6 +47,7 @@ export default class MusicUtils {
                     abcstring += notes[note].letter;
                 }
                 abcstring += ']';
+                abcstring += 4 / measure.length;
             });
             if ((index + 1) % 4 === 0) {
                 abcstring += '|\n';
