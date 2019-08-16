@@ -1,11 +1,16 @@
 
-<button class ="activate-audio" style ="position: right;"> Play Song </button>
-<button class="stop-audio" style="display:none;position: absolute;">Stop Audio</button>
+<div *ngIf="tune$ | async as tune" class="main_contianer">
+  <h2>"{{ tune.name }}" by {{ tune.composer}}</h2> 
+  <span>{{ tune.style }}</span>
+</div>
+<button class ="activate-audio" style ="position: right;">Play</button>
+<button class="stop-audio" style="display:none;position: absolute;">Pause</button>
 <div id="notation"></div>
 
 
-<!-- 
-<div *ngIf="tune$ | async as tune" class="main_contianer">
+
+
+<!-- <div *ngIf="tune$ | async as tune" class="main_contianer">
   <h2>"{{ tune.name }}" by {{ tune.composer }}</h2>
   <span>{{ tune.style }}</span>
   <div class="music_container">
